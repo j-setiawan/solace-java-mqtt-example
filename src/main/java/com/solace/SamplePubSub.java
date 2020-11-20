@@ -24,7 +24,11 @@ public class SamplePubSub implements MqttCallback {
         client.connect(connectOptions);
 
         client.subscribe(topicBase + "/messages");
-        client.publish(topicBase + "/heartbeats", new MqttMessage("ping".getBytes()));
+
+        while (true) {
+            client.publish(topicBase + "/heartbeats", new MqttMessage("ping".getBytes()));
+            Thread.sleep(1000);
+        }
     }
 
     @Override
